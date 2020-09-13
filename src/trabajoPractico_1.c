@@ -14,8 +14,6 @@
 #include "myLibrary.h"
 
 
-
-
 int main(void) {
 
 	setbuf(stdout,NULL);
@@ -45,20 +43,22 @@ int main(void) {
 	do
 	{
 
-		switch (dpn_showMenu(flagOperatorA, flagOperatorB, operatorA, operatorB))//llamada a la función para mostar menu al usuario y que elija la opción.
+		switch (dpn_showMenu1())//llamada a la función para mostar menu al usuario y que elija la opción.
 		{
 		case 1:
-			operatorA=dpn_getFloat("Ingrese el primer operador\n", "error, reingrese el primer operador \n", &operatorA);
+			utn_getNumeroFlotante( &operatorA,"Ingrese el primer operador\n", "error, reingrese el primer operador \n",-1000, 1000,2);
 			flagOperatorA=1;//baja bandera del primer operador
+			dpn_showMenu2(operatorA);
 			break;
 		case 2:
 			if(flagOperatorA==1){//condicion para ingresar el segundo operador
-				operatorB=dpn_getFloat("Ingrese el primer operador", "error, reingrese", &operatorB);
+				utn_getNumeroFlotante( &operatorB,"Ingrese el SEGUNDO operador\n", "error, reingrese el segundo operador \n",-1000, 1000,2);
 				flagOperatorB=1;//indica el ingreso del segundo operador
 			}
 			else{
 				printf("INGRESE EL PRIMER OPERANDO PARA PODER SEGUIR!\n");
 			}
+			dpn_showMenu3(operatorA, operatorB);
 			break;
 
 		case 3:
@@ -111,10 +111,11 @@ int main(void) {
 				printf("Opcion invalida \n");
 			}
 
-			system("pause");
+
 		}
 		while(seguir == 'y');
 
+	system("pause");
 
 	return EXIT_SUCCESS;
 
